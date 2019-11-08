@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="author" content="Python en de Zes Syntax Errors">
+    <title>De Sorteerhoed — #PED6SE</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="shortcut icon" href="/favicon.png">
+</head>
+    <body>
+        <div class="question-icon">
+            <a href="/">
+                <img src="/hat.png" class="question-hat">
+                {% if easteregg %}
+                <img src="/anime.png" class="question-hat-face">
+                {% endif %}
+            </a>
+        </div>
+
+        <div class="question-line">
+            {{ question }}
+        </div>
+
+        <div class="question-answers">
+            {% for answer in answers %}
+                <div data-id="{{answer.value}}" data-weight="{{answer.weight}}" class="question-answer-item" style="background-image: url('wood_{{ answer.color }}.jpg');">
+                    {{ answer.text }}
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="question-progress">
+            <div class="question-progress-bar" style="width: {{progress}}%"></div>
+        </div>
+
+        <img src="dumbledore.png" class="floater-dumbledore">
+        <img src="snape.png" class="floater-snape">
+
+        <script>
+        function getUrlParams() {
+            var params = {};
+            var search = window.location.href.slice( window.location.href.indexOf( '?' ) + 1 );
+            var definitions = search.split( '&' );
+
+            definitions.forEach( function( val, key ) {
+                var parts = val.split( '=', 2 );
+                params[ parts[ 0 ] ] = parts[ 1 ];
+            } );
+
+            return params;
+        }
+        
+        let answers = document.getElementsByClassName("question-answer-item");
+        let hasEgg = document.getElementsByClassName("question-hat-face").length > 0
+        let params = getUrlParams();
+
+        for(answer of answers) {
+            answer.addEventListener('click', e => {
+                const target = e.target;
+                const id = target.getAttribute('data-id');
+                const weight = target.getAttribute('data-weight');
+                const step = params['step'];
+                const data = params['data'];
+
+                if(hasEgg) {
+                    location.href = "/forward?option=" + id + "&weight=" + weight + "&step=" + step + "&data=" + data + "&e=true"
+                } else {
+                    location.href = "/forward?option=" + id + "&weight=" + weight + "&step=" + step + "&data=" + data
+                }
+            });
+        };
+        </script>
+    </body>
+</html>

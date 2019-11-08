@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="author" content="Python en de Zes Syntax Errors">
+    <title>De Sorteerhoed — #PED6SE</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="shortcut icon" href="/favicon.png">
+
+    <!-- ChartJS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+</head>
+    <body>
+        <div class="result-hat-parent">
+            <img src="/hat.png" class="result-hat">
+            {% if easteregg %}
+            <img src="/anime.png" class="result-face">
+            {% endif %}
+        </div>
+
+        <div class="result-note">
+            Ik heb mijn besluit genomen...
+        </div>
+
+        <div class="result-value">
+            {{ result }}
+        </div>
+        
+        <div class="result-retry">
+            <a href="/">Opniuew Proberen</a>
+            <span>•</span>
+            <a href="#" target="_blank" class="result-share">Share</a>
+        </div>
+
+        <img src="dumbledore_lol.png" class="floater-dumbledore img-lol">
+        <img src="snape_lol.png" class="floater-snape img-lol">
+
+        <div class="floater-summary">
+            <img src="/bubble.png">
+            <div class="floater-summary-text">
+                <p>
+                    {{summary}}
+                </p>
+            </div>
+        </div>
+
+        <div class="floater-chart">
+            <img src="/bubble-inv.png">
+            <canvas class="floater-chart-cvs"></canvas>
+        </div>
+
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        <script>
+        const results = JSON.parse("{{results}}");
+        const value = document.getElementsByClassName("result-value")[0];
+        const retry = document.getElementsByClassName("result-retry")[0];
+        const summary = document.getElementsByClassName("floater-summary")[0];
+        const chartbox = document.getElementsByClassName("floater-chart")[0];
+        const chartcvs = document.getElementsByClassName("floater-chart-cvs")[0];
+        const share = document.getElementsByClassName("result-share")[0];
+        const hasEgg = document.getElementsByClassName("result-face").length > 0;
+        
+        let shareValue = encodeURI(value.innerHTML.trim());
+        let shareText = "https%3A%2F%2Fsorteerhoed.nl%2F%20heeft%20mij%20ingedeeld%20bij%20" + shareValue + "%20%E2%9D%A4%EF%B8%8F%F0%9F%92%A6%20%23PED6SE%20"
+
+        if(hasEgg) {
+            value.innerHTML = "FICT is geen specialisatie";
+
+            shareText = "want%20het%20is%20een%20levensstijl%20%F0%9F%98%A9%F0%9F%91%8C%F0%9F%98%89%20%23DaddyPerkamentus";
+
+            summary.style.display = "none";
+            chartbox.style.display = "none";
+        }
+
+        const shareUrl = "https://twitter.com/intent/tweet?hashtags=SorteerMij%2C&original_referer=http%3A%2F%2Flocalhost%3A8082%2Fresult%3Fv%3Dse&ref_src=twsrc%5Etfw&text=" + shareText + "&tw_p=tweetbutton"
+
+        share.setAttribute("href", shareUrl);
+
+        setTimeout(() => {
+            value.style.opacity = 1;
+
+            summary.style.opacity = 1;
+            summary.style.bottom = "270px";
+            chartbox.style.opacity = 1;
+            chartbox.style.bottom = "270px";
+        }, 800);
+
+        setTimeout(() => {
+            retry.style.opacity = 1;
+        }, 1600);
+
+        let total = 0;
+
+        for(score of results) {
+            total += score;
+        }
+
+        const ctx = chartcvs.getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['IAT', 'BDAM', 'SE', 'FICT'],
+                datasets: [{
+                    label: 'Resultaten',
+                    data: results,
+                    backgroundColor: [
+                        '#0abde3',
+                        '#e74c3c',
+                        '#f1c40f',
+                        '#6c5ce7',
+                    ]
+                }]
+            },
+            options: {
+                responsive: false,
+                maintainAspectRatio: false,
+                legend: {
+                    position: 'left',
+                    align: 'center'
+                },
+                tooltips: {
+                    enabled: true,
+                    callbacks: {
+                        label: function(tooltipItem, data) {
+                            const value = data['datasets'][0]['data'][tooltipItem['index']];
+                            const label = data['labels'][tooltipItem['index']];
+                            const perc = (value / total * 100).toFixed(1);
+
+                            console.log(tooltipItem);
+
+                            return perc + '% ' + label;
+                        }
+                    }
+                }
+            }
+        });
+
+        chart.generateLegend();
+        </script>
+    </body>
+</html>

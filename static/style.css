@@ -1,0 +1,313 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    background-image: url('hall.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}
+
+body {
+    height: 100%;
+    overflow: hidden;
+}
+
+a {
+    text-decoration: none;
+}
+
+.sorting-block {
+    width: 450px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.sorting-hat {
+    width: 100%;
+    display: block;
+    cursor: pointer;
+}
+
+.sorting-hat-parent {
+    animation: zoom 1.5s ease-in-out infinite alternate;
+}
+
+.sorting-wrapper {
+    position: relative;
+}
+
+.sorting-face {
+    position: absolute;
+    left: 0;
+    top: 40%;
+    right: 0;
+    display: block;
+    margin: 0 auto;
+    width: 35%;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.sorting-author {
+    font-family: 'Harry';
+    color: rgba(207, 207, 207, 0.719);
+    font-size: 2.2em;
+    text-align: center;
+    padding-top: 30px;
+    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.514);
+}
+
+.sorting-title {
+    font-family: 'Harry';
+    color: white;
+    font-size: 6.5em;
+    text-align: center;
+    padding-top: 20px;
+    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.514);
+}
+
+.text-click, .text-help {
+    color: white;
+    font-family: 'Harry';
+    font-size: 2.6em;
+    text-align: center;
+}
+
+.text-click {
+    position: absolute;
+    top: 230px;
+    left: -200px;
+    transform: rotate(-15deg);
+}
+
+.text-help {
+    position: absolute;
+    top: 110px;
+    right: -220px;
+    transform: rotate(15deg);
+}
+
+.question-icon {
+    margin: 0 auto;
+    width: 200px;
+    position: relative;
+}
+
+.question-hat {
+    width: 100%;
+}
+
+.question-hat-face {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 38%;
+    width: 38%;
+    display: block;
+    margin: 0 auto;
+}
+
+.question-line {
+    padding-bottom: 40px;
+    color: white;
+    font-size: 4em;
+    text-align: center;
+    font-family: 'Harry';
+    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.514);
+}
+
+.question-answer-item {
+    width: 650px;
+    cursor: pointer;
+    background-size: 100% auto;
+    padding: 10px 8px;
+    font-size: 1.5em;
+    margin: 0 auto;
+    margin-bottom: 12px;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.55);
+    font-family: 'Josefin Sans';
+    transition: transform .16s;
+}
+
+.question-answer-item:hover {
+    transform: scale(1.03);
+}
+
+.question-progress {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    background-color: gray;
+}
+
+.question-progress-bar {
+    background-color: royalblue;
+    height: 8px;
+    transition: width 1s;
+}
+
+.floater-dumbledore {
+    position: absolute;
+    bottom: -12px;
+    left: 0;
+    width: 300px;
+}
+
+.floater-snape {
+    position: absolute;
+    bottom: -12px;
+    right: -5px;
+    width: 300px;
+}
+
+.result-hat-parent {
+    position: relative;
+    width: 320px;
+    margin: 0 auto;
+    display: block;
+}
+
+.result-hat {
+    width: 100%;
+}
+
+.result-face {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    width: 40%;
+    top: 38%;
+    display: block;
+    margin: 0 auto;
+}
+
+.result-note {
+    padding-top: 20px;
+    color: rgb(206, 206, 206);
+    font-family: 'Harry';
+    font-size: 3em;
+    text-align: center;
+}
+
+.result-value {
+    color: white;
+    font-family: 'Harry';
+    font-size: 5.5em;
+    padding-top: 40px;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 2.5s;
+}
+
+.result-retry {
+    padding-top: 40px;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 2.5s;
+}
+
+.result-retry > span {
+    color: lightgray;
+    font-size: 2em;
+    padding: 0 10px;
+}
+
+.result-retry > a {
+    color: rgb(37, 203, 224) !important;
+    font-family: 'Harry';
+    font-size: 2em;
+}
+
+.img-lol {
+    animation: wobble 0.7s ease-in-out infinite alternate;
+}
+
+.hat-egg {
+    cursor: pointer;
+}
+
+.floater-summary {
+    width: 350px;
+    position: absolute;
+    left: 50px;
+    bottom: 250px; /* 270px */
+    opacity: 0;
+    transition: all 2.5s;
+}
+
+.floater-chart {
+    width: 350px;
+    position: absolute;
+    right: 50px;
+    bottom: 250px; /* 270px */
+    opacity: 0;
+    transition: all 2.5s;
+}
+
+.floater-summary > img, .floater-chart > img {
+    width: 100%;
+}
+
+.floater-summary-text {
+    position: absolute;
+    left: 40px;
+    right: 40px;
+    top: 40px;
+    height: 128px;
+    font-family: 'Josefin Sans';
+    text-align: center;
+    font-size: 0.9em;
+    display: flex;
+    margin: auto;
+}
+
+.floater-summary-text > p {
+    margin: auto;
+    text-align: center; 
+}
+
+.floater-chart-cvs {
+    position: absolute;
+    left: 40px;
+    right: 40px;
+    top: 40px;
+    height: 130px !important;
+    font-family: 'Josefin Sans';
+    text-align: center;
+    font-size: 0.9em;
+    display: flex;
+    margin: auto;
+}
+
+/* ==== KEYFRAMES ==== */
+@keyframes zoom {
+    0% {
+        transform: scale(1.0);
+    }
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes wobble {
+    0% {
+        transform: rotate(-6deg);
+    }
+    100% {
+        transform: scale(6deg);
+    }
+}
+
+/* ==== FONT FACES ==== */
+@font-face {
+    font-family: 'Harry';
+    src: url('harry.ttf')
+}

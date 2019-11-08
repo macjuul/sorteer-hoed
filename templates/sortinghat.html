@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="author" content="Python en de Zes Syntax Errors">
+    <title>De Sorteerhoed — #PED6SE</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="shortcut icon" href="/favicon.png">
+</head>
+    <body>
+        <div class="sorting-author">
+            Python en de 6 Syntax Errors presenteert...
+        </div>
+        
+        <div class="sorting-title">
+            De Sorteer Hoed
+        </div>
+        
+        <div class="sorting-block">
+            <a class="sorting-link" href="/start">
+                <div class="sorting-wrapper">
+                    <div class="sorting-hat-parent">
+                        <img src="/hat.png" class="sorting-hat">
+                        <img src="/anime.png" class="sorting-face" style="visibility: hidden;">
+                    </div>
+                </div>
+            </a>
+
+            <!-- Floaters -->
+            <div class="text-click">
+                Klik <span class="hat-egg">de hoed</span><br>om te beginnen!
+            </div>
+
+            <div class="text-help">
+                In welke specialisatie<br>kom jij?
+            </div>
+        </div>
+
+        <script>
+        let eggFound = false;
+        let eggElement = document.getElementsByClassName("hat-egg")[0];
+        let faceElement = document.getElementsByClassName("sorting-face")[0];
+        let hatElement = document.getElementsByClassName("sorting-wrapper")[0];
+        let linkElement = document.getElementsByClassName("sorting-link")[0];
+
+        eggElement.addEventListener('click', e => {
+            if(eggFound) return;
+            eggFound = true;
+
+            let audio = new Audio('/music.mp3').play();
+
+            rotation = 0;
+            increment = 0;
+
+            faceElement.style.visibility = "visible";
+            faceElement.style.opacity = 1;
+
+            linkElement.setAttribute('href', '/start?e=true')
+
+            audio.playbackRate = 1;
+
+            setTimeout(() => {
+                function next() {
+                    increment += 0.005;
+                    rotation += increment ** 2;
+
+                    audio.playbackRate += increment;
+
+                    console.log(audio.playbackRate);
+
+                    hatElement.style.transform = "rotate(" + rotation + "deg)";
+
+                    requestAnimationFrame(next);
+                }
+
+                requestAnimationFrame(next);
+            }, 150);
+        });
+        </script>
+    </body>
+</html>
